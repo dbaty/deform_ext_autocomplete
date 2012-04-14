@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Demo application for deform_ext_autocomplete</title>
+  <script type="text/javascript"
+          src="${request.static_url('deform:static/scripts/jquery-1.4.2.min.js')}"></script>
+  <script type="text/javascript"
+          src="${request.static_url('deform:static/scripts/jquery-ui-1.8.11.custom.min.js')}"></script>
+  <script type="text/javascript"
+          src="${request.static_url('deform:static/scripts/deform.js')}"></script>
+  <link rel="stylesheet" href="${request.static_url('deform:static/css/form.css')}"/>
+  <link rel="stylesheet" href="${request.static_url('deform:static/css/jquery.autocomplete.css')}"/>
+  <link rel="stylesheet" href="${request.static_url('deform:static/css/ui-lightness/jquery-ui-1.8.11.custom.css')}"/>
+</head>
+<body>
+
+<p>
+  add form | <a href="edit">edit form</a> | <a href="readonly">read-only form</a>
+</p>
+
+<hr/>
+
+<p>
+  Available persons: <span tal:replace="', '.join(persons)"/>.
+</p>
+
+<form tal:replace="structure rendered_form"/>
+
+</body>
+</html>

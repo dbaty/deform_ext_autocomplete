@@ -1,0 +1,4 @@
+<p>
+  The following value(s) have been saved:
+  <span tal:replace="saved"/>
+</p>

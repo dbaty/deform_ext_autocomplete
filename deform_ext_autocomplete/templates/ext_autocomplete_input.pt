@@ -1,0 +1,36 @@
+<input type="hidden" name="__start__" value="${field.name}:mapping"/>
+<input type="hidden"
+       name="${field.name}"
+       value="${cstruct}"
+       id="${field.oid}"/>
+<input type="text"
+       name="${field.name}_autocomplete"
+       value="${visible_cstruct}"
+       tal:attributes="size field.widget.size;
+                       class field.widget.css_class"
+       id="${field.oid}_autocomplete"/>
+<script tal:condition="field.widget.values" type="text/javascript">
+  function renderItem(ul, item) {
+    if (item.dropdown === undefined) {
+      item.dropdown = item.displayed;
+    }
+    return $('<li></li>').data('item.autocomplete', item)
+                         .append('<a>' + item.dropdown + '</a>')
+                         .appendTo(ul);
+  }
+  function select(event, ui) {
+    $(this).prev('input').val(ui.item.stored);
+    $(this).val(ui.item.displayed);
+    return false;
+  }
+  deform.addCallback(
+    '${field.oid}',
+    function (oid) {
+        $('#' + oid + '_autocomplete').autocomplete({source: ${values},
+                                                     select: select});
+        $('#' + oid + '_autocomplete').autocomplete("option", ${options}
+          ).data('autocomplete')._renderItem = renderItem;
+    }
+  );
+</script>
+<input type="hidden" name="__end__" value="${field.name}:mapping"/>

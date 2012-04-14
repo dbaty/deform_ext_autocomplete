@@ -1,0 +1,198 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Advanced examples &mdash; Deform Extended Autocomplete 0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Deform Extended Autocomplete 0.1 documentation" href="index.html" />
+    <link rel="next" title="Demonstration application" href="demoapp.html" />
+    <link rel="prev" title="Basic example" href="basic.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="demoapp.html" title="Demonstration application"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="basic.html" title="Basic example"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Deform Extended Autocomplete 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="advanced-examples">
+<span id="advanced"></span><h1>Advanced examples<a class="headerlink" href="#advanced-examples" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="showing-yet-another-value-in-the-dropdown">
+<h2>Showing yet another value in the dropdown<a class="headerlink" href="#showing-yet-another-value-in-the-dropdown" title="Permalink to this headline">¶</a></h2>
+<p>An optional third key can be added to the associative array in the
+<tt class="docutils literal"><span class="pre">values</span></tt> argument/attribute of the widget: <tt class="docutils literal"><span class="pre">dropdown</span></tt>. This value
+is displayed in the dropdown menu that may appear when the user starts
+typing letters in the autocomplete text input field.</p>
+<p>In the example shown in the <a class="reference internal" href="basic.html#basic"><em>Basic example</em></a> chapter, we show the persons&#8217;
+name in the dropdown that appears when the user starts typing letters.
+We could highlight typed letters in the names. To do so, we provide an
+additional <tt class="docutils literal"><span class="pre">dropdown</span></tt> key in each item of <tt class="docutils literal"><span class="pre">values</span></tt>. The
+<tt class="docutils literal"><span class="pre">ajax_search</span></tt> view would then look like this:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">highlight_term</span><span class="p">(</span><span class="n">term</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return an HTML representation of ``name`` where ``term`` is</span>
+<span class="sd">    displayed in bold characters.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c"># This is a very naive implementation.</span>
+    <span class="k">return</span> <span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">term</span><span class="p">,</span> <span class="s">&#39;&lt;strong&gt;</span><span class="si">%s</span><span class="s">&lt;/strong&gt;&#39;</span> <span class="o">%</span> <span class="n">term</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">ajax_search</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">term</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">GET</span><span class="p">[</span><span class="s">&#39;term&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">person_id</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">PERSONS</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">term</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="k">continue</span>
+        <span class="n">dropdown</span> <span class="o">=</span> <span class="n">highlight_term</span><span class="p">(</span><span class="n">term</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s">&#39;displayed&#39;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+                    <span class="s">&#39;dropdown&#39;</span><span class="p">:</span> <span class="n">dropdown</span><span class="p">,</span>
+                    <span class="s">&#39;stored&#39;</span><span class="p">:</span> <span class="n">person_id</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">res</span>
+</pre></div>
+</div>
+<p>You may note that the <tt class="docutils literal"><span class="pre">displayed</span></tt> key is left untouched. It should
+not be the same as the <tt class="docutils literal"><span class="pre">dropdown</span></tt> key, as the latter contains HTML
+tags, which should not be used for the <tt class="docutils literal"><span class="pre">displayed</span></tt> key.</p>
+</div>
+<div class="section" id="an-advanced-display-value-callable">
+<h2>An advanced <tt class="docutils literal"><span class="pre">display_value</span></tt> callable<a class="headerlink" href="#an-advanced-display-value-callable" title="Permalink to this headline">¶</a></h2>
+<p>As with any widget in Deform, it is possible to bind the field it is
+attached to, so that the field and/or the widget have access to
+additional bindings, such as the request.</p>
+<p>Here, we will suppose that the persons are stored in a database and
+that we can query it through the <tt class="docutils literal"><span class="pre">db</span></tt> attribute of the request. The
+problem is then to access the request from the <tt class="docutils literal"><span class="pre">display_value</span></tt>
+callable. To do that, we will define a deferred function:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">colander</span>
+
+<span class="nd">@colander.deferred</span>
+<span class="k">def</span> <span class="nf">deferred_autocomplete_widget</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">kw</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return an instance of ``ExtendedAutocompleteInputWidget``</span>
+<span class="sd">    where the ``display_value`` callable has access to the database</span>
+<span class="sd">    connection through the request.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">request</span> <span class="o">=</span> <span class="n">kw</span><span class="p">[</span><span class="s">&#39;request&#39;</span><span class="p">]</span>
+    <span class="k">def</span> <span class="nf">display_value</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">cstruct</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">request</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">person_id</span><span class="o">=</span><span class="n">cstruct</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ExtendedAutocompleteInputWidget</span><span class="p">(</span><span class="n">values</span><span class="o">=</span><span class="s">&#39;/ajax_search&#39;</span><span class="p">,</span>
+                                           <span class="n">display_value</span><span class="o">=</span><span class="n">display_value</span><span class="p">)</span>
+
+ <span class="k">class</span> <span class="nc">AdvancedSchema</span><span class="p">(</span><span class="n">Schema</span><span class="p">):</span>
+     <span class="n">person</span> <span class="o">=</span> <span class="n">SchemaNode</span><span class="p">(</span><span class="n">String</span><span class="p">(),</span>
+                         <span class="n">widget</span><span class="o">=</span><span class="n">deferred_autocomplete_widget</span><span class="p">)</span>
+
+ <span class="k">def</span> <span class="nf">make_form</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+     <span class="n">schema</span> <span class="o">=</span> <span class="n">AdvancedSchema</span><span class="p">()</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">request</span><span class="o">=</span><span class="n">request</span><span class="p">)</span>
+     <span class="k">return</span> <span class="n">Form</span><span class="p">(</span><span class="n">schema</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Again, this is not related at all to the Extended Autocomplete
+widget. This is a pure Colander feature. For further details, see the
+<a class="reference external" href="http://docs.pylonsproject.org/projects/colander/en/latest/binding.html">Colander documentation</a>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Advanced examples</a><ul>
+<li><a class="reference internal" href="#showing-yet-another-value-in-the-dropdown">Showing yet another value in the dropdown</a></li>
+<li><a class="reference internal" href="#an-advanced-display-value-callable">An advanced <tt class="docutils literal"><span class="pre">display_value</span></tt> callable</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="basic.html"
+                        title="previous chapter">Basic example</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="demoapp.html"
+                        title="next chapter">Demonstration application</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/advanced.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="demoapp.html" title="Demonstration application"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="basic.html" title="Basic example"
+             >previous</a> |</li>
+        <li><a href="index.html">Deform Extended Autocomplete 0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Damien Baty.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
