@@ -46,7 +46,6 @@ qa:
 	pyflakes $(package_name)
 	pyflakes demo
 
-# FIXME: add functional tests
 .PHONY: test
 test:
 	PYTHONWARNINGS=all python setup.py test
