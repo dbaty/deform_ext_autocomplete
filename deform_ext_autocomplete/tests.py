@@ -144,7 +144,7 @@ class TestIncludeMe(TestCase):
         search_path = fake_deform.Form.default_renderer.loader.search_path
         self.assertTrue(len(search_path) == 2)
         our_path = resource_filename('deform_ext_autocomplete', 'templates')
-        self.assertIn(our_path, search_path)
+        self.assertTrue(our_path in search_path)
 
 
 class DummyRenderer(object):

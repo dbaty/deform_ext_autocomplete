@@ -4,6 +4,7 @@ from pkg_resources import resource_filename
 from colander import null
 
 import deform
+from deform.compat import string_types
 from deform.widget import AutocompleteInputWidget
 
 
@@ -76,8 +77,8 @@ class ExtendedAutocompleteInputWidget(AutocompleteInputWidget):
         options = {}
         if not self.delay:
             # set default delay if None
-            options['delay'] = (isinstance(self.values,
-                                          basestring) and 400) or 10
+            options['delay'] = (
+                isinstance(self.values, string_types) and 400) or 10
         options['minLength'] = self.min_length
         options = json.dumps(options)
         values = json.dumps(self.values)
