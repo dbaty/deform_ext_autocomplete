@@ -79,7 +79,7 @@ callable. To do that, we will define a deferred function:
         schema = AdvancedSchema().bind(request=request)
         return Form(schema)
 
-Again, this is not related at all to the Extended Autocomplete
-widget. This is a pure Colander feature. For further details, see the
-`Colander documentation
+Again, this is not specific to the Extended Autocomplete widget. This
+is a pure Colander feature. For further details, see the `Colander
+documentation
 <http://docs.pylonsproject.org/projects/colander/en/latest/binding.html>`_.

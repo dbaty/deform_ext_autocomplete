@@ -56,8 +56,12 @@
             
   <div class="section" id="basic-example">
 <span id="basic"></span><h1>Basic example<a class="headerlink" href="#basic-example" title="Permalink to this headline">¶</a></h1>
+<p>First of all, you need to enable the widget by imperatively calling
+the <a class="reference internal" href="api.html#deform_ext_autocomplete.includeme" title="deform_ext_autocomplete.includeme"><tt class="xref py py-class docutils literal"><span class="pre">deform_ext_autocomplete.includeme</span></tt></a> function, or by
+including the <tt class="docutils literal"><span class="pre">deform_ext_autocomplete</span></tt> string in the
+<tt class="docutils literal"><span class="pre">pyramid.includes</span></tt> directive of your Pyramid configuration file.</p>
 <p>Extended Autocomplete uses the same arguments/attributes as Deform
-defaut <a class="reference external" href="http://docs.pylonsproject.org/projects/deform/en/latest/api.html#deform.widget.AutocompleteInputWidget" title="(in deform v0.9.4)"><tt class="xref py py-class docutils literal"><span class="pre">deform.widget.AutocompleteInputWidget</span></tt></a> and an
+defaut <tt class="xref py py-class docutils literal"><span class="pre">deform.widget.AutocompleteInputWidget</span></tt> and an
 additional <tt class="docutils literal"><span class="pre">display_value</span></tt> argument/attribute which must be a
 callable. It must accept two arguments: the field and the <a class="reference external" href="http://docs.pylonsproject.org/projects/colander/en/latest/glossary.html?highlight=cstruct#term-cstruct">cstruct</a>
 (which usually corresponds to the value that is to be stored &#8211; see

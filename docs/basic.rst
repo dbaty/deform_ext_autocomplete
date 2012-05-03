@@ -3,6 +3,11 @@
 Basic example
 =============
 
+First of all, you need to enable the widget by imperatively calling
+the :py:class:`deform_ext_autocomplete.includeme` function, or by
+including the ``deform_ext_autocomplete`` string in the
+``pyramid.includes`` directive of your Pyramid configuration file.
+
 Extended Autocomplete uses the same arguments/attributes as Deform
 defaut :py:class:`deform.widget.AutocompleteInputWidget` and an
 additional ``display_value`` argument/attribute which must be a
@@ -67,3 +72,4 @@ JSON data):
 
 The widget provides additional features that are documented in the
 :ref:`advanced` chapter.
+
