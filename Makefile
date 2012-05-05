@@ -28,7 +28,6 @@ distcheck: clean dist
 	virtualenv --no-site-packages $(tmp_env_dir)
 	$(tmp_env_dir)/bin/easy_install Nose
 	$(tmp_env_dir)/bin/easy_install Coverage
-	$(tmp_env_dir)/bin/easy_install readline
 	mkdir -p $(tmp_src_dir)
 	@name=`python setup.py --name` && \
 		ver=`python setup.py --version` && \
@@ -59,4 +58,4 @@ clean:
 	rm -rf .coverage
 	rm -rf ./dist/
 	rm -rf $(tmp_dir)
-	find . -name "*.pyc" | xargs rm
+	find . -name "*.pyc" | xargs rm -f
