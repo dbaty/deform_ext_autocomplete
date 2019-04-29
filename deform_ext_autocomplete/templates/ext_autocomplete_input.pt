@@ -6,8 +6,7 @@
 <input type="text"
        name="${field.name}_autocomplete"
        value="${visible_cstruct}"
-       tal:attributes="size field.widget.size;
-                       class field.widget.css_class"
+       tal:attributes="class field.widget.css_class"
        id="${field.oid}_autocomplete"/>
 <script tal:condition="field.widget.values" type="text/javascript">
   function renderItem(ul, item) {
@@ -29,7 +28,7 @@
         $('#' + oid + '_autocomplete').autocomplete({source: ${values},
                                                      select: select});
         $('#' + oid + '_autocomplete').autocomplete("option", ${options}
-          ).data('autocomplete')._renderItem = renderItem;
+          ).data('ui-autocomplete')._renderItem = renderItem;
     }
   );
 </script>

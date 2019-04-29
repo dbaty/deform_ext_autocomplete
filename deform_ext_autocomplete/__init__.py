@@ -19,7 +19,10 @@ def includeme(config, deform=deform):
     search_path = list(deform.Form.default_renderer.loader.search_path)
     path = resource_filename('deform_ext_autocomplete', 'templates')
     search_path.append(path)
+    static_path = resource_filename('deform_ext_autocomplete', 'static')
+    config.add_static_view(static_path, 'deform_ext_autocomplete:static')
     deform.Form.default_renderer.loader.search_path = search_path
+    config.include('pyramid_chameleon')
 
 
 class ExtendedAutocompleteInputWidget(AutocompleteInputWidget):

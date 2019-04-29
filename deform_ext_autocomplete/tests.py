@@ -65,7 +65,7 @@ class TestWidget(TestCase):
         self.assertEqual(renderer.kw['field'], field)
         self.assertEqual(renderer.kw['cstruct'], cstruct)
         self.assertEqual(renderer.kw['options'],
-                         '{"delay": 400, "minLength": 2}')
+                         '{"delay": 400, "minLength": 1}')
         self.assertEqual(renderer.kw['values'],
                          json.dumps(url))
 
@@ -83,7 +83,7 @@ class TestWidget(TestCase):
         self.assertEqual(renderer.kw['field'], field)
         self.assertEqual(renderer.kw['cstruct'], cstruct)
         self.assertEqual(renderer.kw['options'],
-                         '{"delay": 10, "minLength": 2}')
+                         '{"delay": 10, "minLength": 1}')
         self.assertEqual(renderer.kw['values'],
                          json.dumps(vals))
 
@@ -137,14 +137,24 @@ class TestIncludeMe(TestCase):
         return FakeDeformModule()
 
     def test_basics(self):
+        from unittest.mock import Mock
         from pkg_resources import resource_filename
         fake_deform = self._get_fake_deform_module()
-        config = 'fake'
+        config = Mock()
         self._call_fut(config, fake_deform=fake_deform)
         search_path = fake_deform.Form.default_renderer.loader.search_path
-        self.assertTrue(len(search_path) == 2)
+        self.assertEqual(len(search_path), 2)
         our_path = resource_filename('deform_ext_autocomplete', 'templates')
         self.assertTrue(our_path in search_path)
+        self.assertEqual(len(config.add_static_view.mock_calls), 1)
+        self.assertEqual(config.add_static_view.mock_calls[0][1][1],
+            'deform_ext_autocomplete:static'
+        )
+        self.assertEqual(len(config.include.mock_calls), 1)
+        self.assertEqual(config.include.mock_calls[0][1][0],
+            'pyramid_chameleon'
+        )
+
 
 
 class DummyRenderer(object):

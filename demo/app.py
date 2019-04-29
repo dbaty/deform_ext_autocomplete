@@ -4,7 +4,8 @@ Instructions:
 
 1. Install Pyramid.
 2. Install deform_ext_autocomplete.
-3. Run "python app.py".
+3. Install waitress
+4. Run "python app.py".
 
 An HTTP server will listen on port 61523: http://0.0.0.0:61523
 """
@@ -65,9 +66,9 @@ def _validate_and_redirect(request, view, route):
     form = make_form(request, request.route_url(route))
     try:
         data = form.validate(request.POST.items())
-    except ValidationFailure, e:
+    except ValidationFailure as e:
         return view(request, e)
-    url = request.route_url('saved', _query={'saved': unicode(data)})
+    url = request.route_url('saved', _query={'saved': data})
     return HTTPSeeOther(url)
 
 
