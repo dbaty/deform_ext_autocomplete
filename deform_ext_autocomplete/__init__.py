@@ -75,7 +75,7 @@ class ExtendedAutocompleteInputWidget(AutocompleteInputWidget):
         if cstruct in (null, None):
             cstruct = ''
         options = {}
-        if not self.delay:
+        if not hasattr(self, 'delay'):
             # set default delay if None
             options['delay'] = (
                 isinstance(self.values, string_types) and 400) or 10
