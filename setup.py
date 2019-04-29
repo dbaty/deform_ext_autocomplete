@@ -14,7 +14,7 @@ requires = ('deform',
             )
 
 setup(name='deform_ext_autocomplete',
-      version='0.1',
+      version='0.2',
       description=DESCR,
       long_description=README + '\n\n' + CHANGES,
       classifiers=(
