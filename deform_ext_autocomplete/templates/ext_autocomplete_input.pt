@@ -29,7 +29,7 @@
         $('#' + oid + '_autocomplete').autocomplete({source: ${values},
                                                      select: select});
         $('#' + oid + '_autocomplete').autocomplete("option", ${options}
-          ).data('autocomplete')._renderItem = renderItem;
+          ).data('ui-autocomplete')._renderItem = renderItem;
     }
   );
 </script>
