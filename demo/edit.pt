@@ -3,14 +3,14 @@
 <head>
   <title>Demo application for deform_ext_autocomplete</title>
   <script type="text/javascript"
-          src="${request.static_url('deform:static/scripts/jquery-1.4.2.min.js')}"></script>
+          src="${request.static_url('deform:static/scripts/jquery-2.0.3.min.js')}"></script>
   <script type="text/javascript"
-          src="${request.static_url('deform:static/scripts/jquery-ui-1.8.11.custom.min.js')}"></script>
+          src="${request.static_url('deform_ext_autocomplete:static/jquery-ui.min.js')}"></script>
   <script type="text/javascript"
           src="${request.static_url('deform:static/scripts/deform.js')}"></script>
   <link rel="stylesheet" href="${request.static_url('deform:static/css/form.css')}"/>
   <link rel="stylesheet" href="${request.static_url('deform:static/css/jquery.autocomplete.css')}"/>
-  <link rel="stylesheet" href="${request.static_url('deform:static/css/ui-lightness/jquery-ui-1.8.11.custom.css')}"/>
+  <link rel="stylesheet" href="${request.static_url('deform_ext_autocomplete:static/jquery-ui.min.css')}" />
 </head>
 <body>
 

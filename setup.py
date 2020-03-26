@@ -11,6 +11,7 @@ DESCR = ('This package provides a Deform autocomplete widget that '
          'to the user.')
 
 requires = ('deform',
+           'pyramid_chameleon',
             )
 
 setup(name='deform_ext_autocomplete',
@@ -23,10 +24,10 @@ setup(name='deform_ext_autocomplete',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2.6',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.2'),
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8'),
       author='Damien Baty',
       author_email='damien.baty.remove@gmail.com',
       url='http://readthedocs.org/projects/deform_ext_autocomplete/',
