@@ -1,13 +1,14 @@
-<input type="hidden" name="__start__" value="${field.name}:mapping"/>
 <input type="hidden"
        name="${field.name}"
        value="${cstruct}"
        id="${field.oid}"/>
+<input type="hidden" name="__start__" value="${field.name}_autocomplete:ignore">
 <input type="text"
        name="${field.name}_autocomplete"
        value="${visible_cstruct}"
        tal:attributes="class field.widget.css_class"
        id="${field.oid}_autocomplete"/>
+<input type="hidden" name="__end__" value=""/>
 <script tal:condition="field.widget.values" type="text/javascript">
   function renderItem(ul, item) {
     if (item.dropdown === undefined) {
@@ -18,7 +19,7 @@
                          .appendTo(ul);
   }
   function select(event, ui) {
-    $(this).prev('input').val(ui.item.stored);
+    $('#${field.oid}').val(ui.item.stored);
     $(this).val(ui.item.displayed);
     return false;
   }
@@ -32,4 +33,3 @@
     }
   );
 </script>
-<input type="hidden" name="__end__" value="${field.name}:mapping"/>

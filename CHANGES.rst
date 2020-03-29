@@ -4,12 +4,26 @@ Changes
 1.0 (Unreleased)
 ----------------
 
-* Upgrade to Deform 2 and Pyramid 1.10 compatibility
-* Bundle a modern version of jqueryUI and upgrade to support it
-* Drop Python 2 support in favour of Python 3
+**WARNING :** This release contains many backwards-incompatible changes.
+
+* |backward-incompatible| Add ``strip`` parameter that allows to strip
+  leading and trailing whitespace on deserialization. As with other
+  text-like widgets in Deform, this parameter is now enabled by
+  default. This is why this change is not backward compatible.
+* Correctly handle ``delay`` parameter.
+* |backward-incompatible| Upgrade to Deform 2 and Pyramid 1.10 compatibility
+* |backward-incompatible| Bundle a modern version of jqueryUI and upgrade to support it
+* |backward-incompatible| Drop Python 2 support in favour of Python 3
 
 
 0.1 (2012-04-15)
 ----------------
 
 First public release.
+
+
+.. role:: raw-html(raw)
+
+.. |backward-incompatible| raw:: html
+
+    <span style="background-color: #ffffbc; padding: 0.3em; font-weight: bold;">backward incompatible</span>

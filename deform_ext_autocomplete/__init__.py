@@ -68,20 +68,39 @@ class ExtendedAutocompleteInputWidget(AutocompleteInputWidget):
         item. Note that ``cstruct`` may be the empty string when the
         field has not been filled. Default: ``lambda widget, field,
         cstruct: cstruct``
+
+    strip
+        If true, during deserialization, strip the value of leading
+        and trailing whitespace. Default: ``True``.
+
+    min_length
+        ``min_length`` is the number of characters to wait for before
+        activating the autocomplete call. Default: ``1``.
+
+    delay
+        ``delay`` is the number of milliseconds to wait for before
+        activating the autocomplete call. Default: ``400`` (ms) if
+        values are fetched via AJAX, ``10`` (ms) otherwise.
     """
     template = 'ext_autocomplete_input'
     readonly_template = 'readonly/ext_autocomplete_input'
     values = ()
     display_value = lambda widget, field, cstruct: cstruct
+    strip = True
+    min_length = 1
+    delay = None  # varying default, see `serialize()`
 
     def serialize(self, field, cstruct, readonly=False):
         if cstruct in (null, None):
             cstruct = ''
         options = {}
-        if not hasattr(self, 'delay'):
-            # set default delay if None
-            options['delay'] = (
-                isinstance(self.values, string_types) and 400) or 10
+        delay = getattr(self, 'delay', None)
+        if delay is None:
+            if isinstance(self.values, string_types):
+                delay = 400
+            else:
+                delay = 10
+        options['delay'] = delay
         options['minLength'] = self.min_length
         options = json.dumps(options)
         values = json.dumps(self.values)
@@ -93,9 +112,3 @@ class ExtendedAutocompleteInputWidget(AutocompleteInputWidget):
                               field=field,
                               options=options,
                               values=values)
-
-
-    def deserialize(self, field, pstruct):
-        if pstruct is null:
-            return null
-        return pstruct.get(field.name) or null

@@ -20,14 +20,14 @@ class TestWidget(TestCase):
         schema = DummySchema()
         field = DummyField(schema, name='person')
         widget = self._makeOne()
-        pstruct = {'person': '', 'person_autocomplete': ''}
+        pstruct = ''
         self.assertEqual(widget.deserialize(field, pstruct), colander.null)
 
     def test_deserialize_filled(self):
         schema = DummySchema()
         field = DummyField(schema, name='person')
         widget = self._makeOne()
-        pstruct = {'person': 'jsmith', 'person_autocomplete': 'John Smith'}
+        pstruct = 'jsmith'
         self.assertEqual(widget.deserialize(field, pstruct), 'jsmith')
 
     # The tests below have all been copied from
