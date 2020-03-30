@@ -18,14 +18,14 @@
                          .append('<a>' + item.dropdown + '</a>')
                          .appendTo(ul);
   }
-  function select(event, ui) {
-    $('#${field.oid}').val(ui.item.stored);
-    $(this).val(ui.item.displayed);
-    return false;
-  }
   deform.addCallback(
     '${field.oid}',
     function (oid) {
+        function select(event, ui) {
+          $('#' + oid).val(ui.item.stored);
+          $(this).val(ui.item.displayed);
+          return false;
+        }
         $('#' + oid + '_autocomplete').autocomplete({source: ${values},
                                                      select: select});
         $('#' + oid + '_autocomplete').autocomplete("option", ${options}
