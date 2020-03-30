@@ -21,15 +21,16 @@
   deform.addCallback(
     '${field.oid}',
     function (oid) {
-        function select(event, ui) {
-          $('#' + oid).val(ui.item.stored);
-          $(this).val(ui.item.displayed);
-          return false;
-        }
-        $('#' + oid + '_autocomplete').autocomplete({source: ${values},
-                                                     select: select});
-        $('#' + oid + '_autocomplete').autocomplete("option", ${options}
-          ).data('ui-autocomplete')._renderItem = renderItem;
+      var options = ${options}
+      options.source = ${values}
+      options.select = function (event, ui) {
+        $('#' + oid).val(ui.item.stored)
+        $(this).val(ui.item.displayed)
+        return false
+      }
+      $('#' + oid + '_autocomplete')
+        .autocomplete(options)
+        .data('ui-autocomplete')._renderItem = renderItem
     }
   );
 </script>
