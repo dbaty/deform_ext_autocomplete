@@ -1,4 +1,6 @@
 <p>
-  The following value(s) have been saved:
-  <span tal:replace="saved"/>
+  The following data have been saved:
+  <pre tal:content="saved"></pre>
 </p>
+
+<a href="/">go back to forms</a>

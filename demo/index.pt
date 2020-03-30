@@ -13,20 +13,41 @@
     <link tal:repeat="requirement requirements['css']"
           rel="stylesheet"
           href="${request.static_url(requirement)}"/>
+    <style>
+     body {
+       padding: 1em;
+     }
+    </style>
   </head>
-<body>
+  <body>
 
-<p>
-  add form | <a href="edit">edit form</a> | <a href="readonly">read-only form</a>
-</p>
+    <p>
+      Available persons: <span tal:replace="', '.join(persons)"/>.
+    </p>
 
-<hr/>
+    <hr>
 
-<p>
-  Available persons: <span tal:replace="', '.join(persons)"/>.
-</p>
+    <h1>Add form (single selection)</h1>
 
-<form tal:replace="structure form"/>
+    <form tal:replace="structure forms['add_single']"/>
 
-</body>
+    <hr>
+
+    <h1>Add form (multiple selection)</h1>
+
+    <form tal:replace="structure forms['add_multiple']"/>
+
+    <hr>
+
+    <h1>Edit form (multiple selection)</h1>
+
+    <form tal:replace="structure forms['edit_multiple']"/>
+
+    <hr>
+
+    <h1>Read-only form</h1>
+
+    <form tal:replace="structure forms['read_only']"/>
+
+  </body>
 </html>
