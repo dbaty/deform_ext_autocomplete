@@ -8,21 +8,40 @@ from deform.compat import string_types
 from deform.widget import AutocompleteInputWidget
 
 
-def includeme(config, deform=deform):
+RESOURCES = {
+    'css': (
+        'deform_ext_autocomplete:static/jquery-ui.min.css',
+    ),
+    'js': (
+        'deform_ext_autocomplete:static/jquery-ui.min.js',
+    )
+}
+
+
+def includeme(config):
     """Call this function to enable the widget (more precisely,
     register the widget templates) or add "deform_ext_autocomplete" in
     the ``pyramid.includes`` directive of your Pyramid configuration
     file.
-
-    The ``deform`` argument should only be used in tests.
     """
-    search_path = list(deform.Form.default_renderer.loader.search_path)
-    path = resource_filename('deform_ext_autocomplete', 'templates')
-    search_path.append(path)
+    _add_search_path()
+    _add_resources_to_registry()
+
     static_path = resource_filename('deform_ext_autocomplete', 'static')
     config.add_static_view(static_path, 'deform_ext_autocomplete:static')
-    deform.Form.default_renderer.loader.search_path = search_path
     config.include('pyramid_chameleon')
+
+
+def _add_search_path():
+    path = resource_filename('deform_ext_autocomplete', 'templates')
+    loader = deform.Form.default_renderer.loader
+    loader.search_path = list(loader.search_path) + [path]
+
+
+def _add_resources_to_registry():
+    registry = deform.Form.default_resource_registry
+    registry.set_css_resources('deform_ext_autocomplete', None, *RESOURCES['css'])
+    registry.set_js_resources('deform_ext_autocomplete', None, *RESOURCES['js'])
 
 
 class ExtendedAutocompleteInputWidget(AutocompleteInputWidget):
@@ -84,6 +103,9 @@ class ExtendedAutocompleteInputWidget(AutocompleteInputWidget):
     """
     template = 'ext_autocomplete_input'
     readonly_template = 'readonly/ext_autocomplete_input'
+    requirements = (
+        ('deform_ext_autocomplete', None),
+    )
     values = ()
     display_value = lambda widget, field, cstruct: cstruct
     strip = True

@@ -6,6 +6,9 @@ Changes
 
 **WARNING :** This release contains many backwards-incompatible changes.
 
+* Define widget requirements so that users can call
+  ``Form.get_widget_resources()`` to fetch CSS and JavaScript
+  requirements.
 * |backward-incompatible| Add ``strip`` parameter that allows to strip
   leading and trailing whitespace on deserialization. As with other
   text-like widgets in Deform, this parameter is now enabled by

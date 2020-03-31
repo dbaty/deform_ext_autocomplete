@@ -54,9 +54,12 @@ def make_form(request, action):
 def add_form(request, form=None):
     if form is None:
         form = make_form(request, request.route_url('add'))
-    return {'request': request,
-            'persons': sorted(PERSONS.values()),
-            'rendered_form': form.render()}
+    return {
+        'request': request,
+        'requirements': form.get_widget_resources(),
+        'form': form.render(),
+        'persons': sorted(PERSONS.values()),
+    }
 
 
 def _validate_and_redirect(request, view, route):
@@ -88,7 +91,10 @@ def edit_form(request, form=None):
         form = form.render(form_data)
     else:
         form = form.render()
-    return {'rendered_form': form}
+    return {
+        'requirements': form.get_widget_resources(),
+        'form': form
+    }
 
 
 def edit(request):

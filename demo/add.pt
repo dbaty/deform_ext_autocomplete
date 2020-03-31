@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Demo application for deform_ext_autocomplete</title>
-  <script type="text/javascript"
-          src="${request.static_url('deform:static/scripts/jquery-2.0.3.min.js')}"></script>
-  <script type="text/javascript"
-          src="${request.static_url('deform_ext_autocomplete:static/jquery-ui.min.js')}"></script>
-  <script type="text/javascript"
-          src="${request.static_url('deform:static/scripts/deform.js')}"></script>
-  <link rel="stylesheet" href="${request.static_url('deform:static/css/form.css')}"/>
-  <link rel="stylesheet" href="${request.static_url('deform:static/css/jquery.autocomplete.css')}"/>
-  <link rel="stylesheet" href="${request.static_url('deform_ext_autocomplete:static/jquery-ui.min.css')}"/>
-</head>
+  <head>
+    <script type="text/javascript"
+            src="${request.static_url('deform:static/scripts/jquery-2.0.3.min.js')}"></script>
+    <script tal:repeat="requirement requirements['js']"
+            type="text/javascript"
+            src="${request.static_url(requirement)}"></script>
+    <link rel="stylesheet"
+          href="${request.static_url('deform:static/css/bootstrap.min.css')}"
+          type="text/css" media="screen" charset="utf-8"/>
+    <link rel="stylesheet" href="${request.static_url('deform:static/css/form.css')}"/>
+    <link tal:repeat="requirement requirements['css']"
+          rel="stylesheet"
+          href="${request.static_url(requirement)}"/>
+  </head>
 <body>
 
 <p>
@@ -24,7 +26,7 @@
   Available persons: <span tal:replace="', '.join(persons)"/>.
 </p>
 
-<form tal:replace="structure rendered_form"/>
+<form tal:replace="structure form"/>
 
 </body>
 </html>
