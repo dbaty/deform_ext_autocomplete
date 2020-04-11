@@ -6,12 +6,11 @@ package_name = deform_ext_autocomplete
 
 .PHONY: coverage
 coverage:
-	coverage run setup.py test -q
-	coverage html -d "$(tmp_cov_dir)"
-	open "$(tmp_cov_dir)/index.html"
-	@echo "Coverage information is available at '$(tmp_cov_dir)'."
+	pytest --cov deform_ext_autocomplete
 
-cov: coverage
+.PHONY: test
+test:
+	pytest
 
 .PHONY: dist
 dist:
@@ -25,10 +24,6 @@ qa:
 	pyflakes setup.py
 	pyflakes $(package_name)
 	pyflakes demo
-
-.PHONY: test
-test:
-	PYTHONWARNINGS=all python setup.py test
 
 .PHONY: upload
 upload:
