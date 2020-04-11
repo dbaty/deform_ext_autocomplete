@@ -119,44 +119,6 @@ class TestWidget(TestCase):
         self.assertEqual(renderer.kw['visible_cstruct'], 'John Smith')
 
 
-class TestIncludeMe(TestCase):
-
-    def _call_fut(self, config, fake_deform):
-        from deform_ext_autocomplete import includeme
-        return includeme(config, fake_deform)
-
-    def _get_fake_deform_module(self):
-        class FakeDeformModule(object):
-            class _Form(object):
-                class DefaultRenderer(object):
-                    class Loader(object):
-                        search_path = ('foo', )
-                    loader = Loader()
-                default_renderer = DefaultRenderer()
-            Form = _Form()
-        return FakeDeformModule()
-
-    def test_basics(self):
-        from unittest.mock import Mock
-        from pkg_resources import resource_filename
-        fake_deform = self._get_fake_deform_module()
-        config = Mock()
-        self._call_fut(config, fake_deform=fake_deform)
-        search_path = fake_deform.Form.default_renderer.loader.search_path
-        self.assertEqual(len(search_path), 2)
-        our_path = resource_filename('deform_ext_autocomplete', 'templates')
-        self.assertTrue(our_path in search_path)
-        self.assertEqual(len(config.add_static_view.mock_calls), 1)
-        self.assertEqual(config.add_static_view.mock_calls[0][1][1],
-            'deform_ext_autocomplete:static'
-        )
-        self.assertEqual(len(config.include.mock_calls), 1)
-        self.assertEqual(config.include.mock_calls[0][1][0],
-            'pyramid_chameleon'
-        )
-
-
-
 class DummyRenderer(object):
     def __call__(self, template, **kw):
         self.template = template

@@ -3,12 +3,6 @@
 ##
 
 package_name = deform_ext_autocomplete
-## WARNING: tmp_dir is deleted in the 'clean' rule. Be sure not to use
-## "/tmp", "." or any directory that may contain anything else.
-tmp_dir = /tmp/$(package_name)-distcheck
-tmp_src_dir = $(tmp_dir)/src
-tmp_cov_dir = $(tmp_dir)/coverage-output
-tmp_env_dir = $(tmp_dir)/testing-env
 
 .PHONY: coverage
 coverage:
@@ -22,19 +16,6 @@ cov: coverage
 .PHONY: dist
 dist:
 	python setup.py sdist
-
-.PHONY: distcheck
-distcheck: clean dist
-	virtualenv --no-site-packages $(tmp_env_dir)
-	$(tmp_env_dir)/bin/easy_install Nose
-	$(tmp_env_dir)/bin/easy_install Coverage
-	mkdir -p $(tmp_src_dir)
-	@name=`python setup.py --name` && \
-		ver=`python setup.py --version` && \
-		tar xfz ./dist/$$name-$$ver.tar.gz -C $(tmp_src_dir) && \
-		cd $(tmp_src_dir)/$$name-$$ver && \
-		$(tmp_env_dir)/bin/python setup.py install && \
-		$(tmp_env_dir)/bin/nosetests
 
 .PHONY:	qa
 qa:
@@ -57,5 +38,4 @@ upload:
 clean:
 	rm -rf .coverage
 	rm -rf ./dist/
-	rm -rf $(tmp_dir)
 	find . -name "*.pyc" | xargs rm -f
