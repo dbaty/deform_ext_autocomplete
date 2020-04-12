@@ -12,6 +12,10 @@ coverage:
 test:
 	pytest
 
+.PHONY: docs
+docs:
+	SPHINXOPTS="-W -n" $(MAKE) -C docs html
+
 .PHONY: dist
 dist:
 	python setup.py sdist
