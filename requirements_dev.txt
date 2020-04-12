@@ -4,3 +4,5 @@ sphinx
 sphinx_rtd_theme
 pytest
 pytest-cov
+pylint
+pylint_strict_informational

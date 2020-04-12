@@ -20,14 +20,10 @@ docs:
 dist:
 	python setup.py sdist
 
-.PHONY:	qa
-qa:
-	pep8 -r setup.py || true
-	pep8 -r $(package_name) || true
-	pep8 -r demo || true
-	pyflakes setup.py
-	pyflakes $(package_name)
-	pyflakes demo
+.PHONY:	quality
+quality:
+	python setup.py check --strict --metadata --restructuredtext
+	pylint --reports=no setup.py deform_ext_autocomplete
 
 .PHONY: upload
 upload:

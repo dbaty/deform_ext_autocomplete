@@ -126,7 +126,7 @@ class ExtendedAutocompleteInputWidget(AutocompleteInputWidget):
         options['minLength'] = self.min_length
         options = json.dumps(options)
         values = json.dumps(self.values)
-        template = readonly and self.readonly_template or self.template
+        template = self.readonly_template if readonly else self.template
         visible_cstruct = self.display_value(field, cstruct)
         return field.renderer(template,
                               cstruct=cstruct,  # hidden field

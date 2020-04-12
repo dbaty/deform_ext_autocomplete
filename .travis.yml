@@ -10,6 +10,7 @@ matrix:
     - {python: 'nightly', env: BUILD=test}
 
     - {python: '3.8', env: BUILD=docs}
+    - {python: '3.8', env: BUILD=quality}
 
   allow_failures:
     - python: 'nightly'
