@@ -1,7 +1,19 @@
 language: python
-python:
-  - 3.6
-  - 3.7
-  - 3.8
-install: python setup.py install
-script:  nosetests
+cache: pip
+
+matrix:
+  fast_finish: true
+  include:
+    - {python: '3.6', env: BUILD=test}
+    - {python: '3.7', env: BUILD=test}
+    - {python: '3.8', env: BUILD=test}
+    - {python: 'nightly', env: BUILD=test}
+
+    - {python: '3.8', env: BUILD=docs}
+
+  allow_failures:
+    - python: 'nightly'
+
+install: travis_retry pip install -r requirements_dev.txt
+
+script: make $BUILD

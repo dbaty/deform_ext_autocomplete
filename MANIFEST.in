@@ -8,4 +8,3 @@ graft docs
 
 prune demo
 exclude Makefile
-exclude tox.ini
