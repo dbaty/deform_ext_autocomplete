@@ -17,12 +17,10 @@ from colander import Schema
 from colander import SchemaNode
 from colander import SequenceSchema
 from colander import String
-
 from deform import Form
 from deform import ValidationFailure
 from deform.widget import HiddenWidget
 from deform.widget import SequenceWidget
-
 from pyramid.config import Configurator
 from pyramid.httpexceptions import HTTPSeeOther
 

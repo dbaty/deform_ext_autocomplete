@@ -1,6 +1,5 @@
-from pkg_resources import resource_filename
-
 import deform
+from pkg_resources import resource_filename
 from pyramid.config import Configurator
 
 import deform_ext_autocomplete

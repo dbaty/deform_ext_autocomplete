@@ -22,6 +22,7 @@ dist:
 
 .PHONY:	quality
 quality:
+	isort --check-only --diff
 	python setup.py check --strict --metadata --restructuredtext
 	pylint --reports=no setup.py deform_ext_autocomplete
 

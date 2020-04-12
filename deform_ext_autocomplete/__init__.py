@@ -1,11 +1,10 @@
 import json
-from pkg_resources import resource_filename
 
-from colander import null
-
+import colander
 import deform
 from deform.compat import string_types
 from deform.widget import AutocompleteInputWidget
+from pkg_resources import resource_filename
 
 
 RESOURCES = {
@@ -115,7 +114,7 @@ class ExtendedAutocompleteInputWidget(AutocompleteInputWidget):
         super().__init__(*args, **kwargs)
 
     def serialize(self, field, cstruct, readonly=False):
-        if cstruct in (null, None):
+        if cstruct in (colander.null, None):
             cstruct = ''
         options = {}
         delay = getattr(self, 'delay', None)

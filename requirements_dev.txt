@@ -1,8 +1,14 @@
 -e .
 
-sphinx
-sphinx_rtd_theme
+# Testing
 pytest
 pytest-cov
+
+# Docs
+sphinx
+sphinx_rtd_theme
+
+# Quality
+isort[pyproject]
 pylint
 pylint_strict_informational
