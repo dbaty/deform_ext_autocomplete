@@ -1,41 +1,4 @@
-import os
-
-from setuptools import find_packages
-from setuptools import setup
+import setuptools
 
 
-here = os.path.abspath(os.path.dirname(__file__))
-README = open(os.path.join(here, 'README.rst')).read()
-CHANGES = open(os.path.join(here, 'CHANGES.rst')).read()
-DESCR = ('This package provides a Deform autocomplete widget that '
-         'stores a value that may be different from the one shown '
-         'to the user.')
-
-requires = ('deform',
-           'pyramid_chameleon',
-            )
-
-setup(name='deform_ext_autocomplete',
-      version='1.0',
-      description=DESCR,
-      long_description=README + '\n\n' + CHANGES,
-      classifiers=(
-        'Development Status :: 4 - Beta',
-        'Environment :: Web Environment',
-        'Intended Audience :: Developers',
-        'License :: OSI Approved :: BSD License',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
-        'Programming Language :: Python :: 3.8'),
-      author='Damien Baty',
-      author_email='damien.baty.remove@gmail.com',
-      url='https://deform-ext-autocomplete.readthedocs.io/en/latest/',
-      keywords='deform form autocomplete',
-      packages=find_packages(),
-      include_package_data=True,
-      zip_safe=False,
-      install_requires=requires,
-      test_suite='deform_ext_autocomplete',
-      )
+setuptools.setup()
