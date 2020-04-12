@@ -19,10 +19,9 @@ RESOURCES = {
 
 
 def includeme(config):
-    """Call this function to enable the widget (more precisely,
-    register the widget templates) or add "deform_ext_autocomplete" in
-    the ``pyramid.includes`` directive of your Pyramid configuration
-    file.
+    """Call this function to enable the widget or add
+    "deform_ext_autocomplete" in the ``pyramid.includes`` directive of
+    your Pyramid configuration file.
     """
     _add_search_path()
     _add_resources_to_registry()

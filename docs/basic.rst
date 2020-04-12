@@ -17,12 +17,13 @@ callable. It must accept two arguments: the field and the `cstruct
 `Colander
 <http://docs.pylonsproject.org/projects/colander/en/latest/index.html>`_
 documentation for further details). This callable should return a
-string or unicode object that will be displayed to the user in the
-text input field. This callable is only used when the form has been
-filled, for example when redisplaying an add form that has an error,
-or when displaying an edit form.
+string that will be displayed to the user in the text input field.
+This callable is only used when the form has been filled, for
+example when redisplaying an add form that has an error, or when
+displaying an edit form.
 
-Here is a basic example of a schema that uses the widget:
+There is a :doc:`demo application <demoapp>` if you want to see it in
+action, but here is a basic example of a schema that uses the widget:
 
 .. code-block:: python
 
@@ -32,10 +33,12 @@ Here is a basic example of a schema that uses the widget:
 
    from deform_ext_autocomplete import ExtendedAutocompleteInputWidget
 
-   PERSONS = {'jhendrix': 'Jimi Hendrix',
-              'jpage': 'Jimmy Page',
-              'jbonham': 'John Bonham',
-              'bcobham': 'Billy Cobham'}
+   PERSONS = {
+       'jhendrix': 'Jimi Hendrix',
+       'jpage': 'Jimmy Page',
+       'jbonham': 'John Bonham',
+       'bcobham': 'Billy Cobham',
+   }
 
    def display_value(field, person_id):
        return PERSONS.get(person_id, '')
@@ -45,7 +48,9 @@ Here is a basic example of a schema that uses the widget:
            String(),
            widget=ExtendedAutocompleteInputWidget(
                display_value=display_value,
-               values='/ajax_search'))
+               values='/ajax_search',
+           )
+       )
 
 The ``values`` argument/attribute must be either an iterable that can
 be converted to a JSON array, or a string representing a URL. If the

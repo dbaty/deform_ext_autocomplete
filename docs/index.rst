@@ -5,23 +5,22 @@ Extended Autocomplete widget provides a few features that are not
 available in the default autocomplete widget shipped with `Deform
 <http://docs.pylonsproject.org/projects/deform/en/latest/>`_. Essentially,
 Extended Autocomplete allows the developer to show a value to the user
-that is different from the one that is returned by the widget.
+that is different from the one that is returned by the widget (and
+eventually stored).
 
 For example, let's suppose that we have a database that contains
-persons. For each person, the database holds the person's full name,
-the person's birthdate, and a unique numerical identifier that is
-automatically incremented by the database when a person is added (in
-other words, a primary key):
+persons. For each person, the database holds the person's full name
+and a unique numerical identifier (a primary key):
 
-=========== ========== ==========
- Identifier Full name  Birth date
-=========== ========== ==========
- 1          John Smith 1950-01-01
- 2          John Smith 1951-01-01
- 3          Jane Doe   1960-01-01
-=========== ========== ==========
+=========== ==========
+ Identifier Full name
+=========== ==========
+ 1          John Smith
+ 2          John Smith
+ 3          Jane Doe
+=========== ==========
 
-Also, we have a form that asks us to select a person. This form should
+We need a form that asks us to select a person. This form should
 return the person's numerical identifier, which is the piece of
 information that uniquely identifies a person.
 
