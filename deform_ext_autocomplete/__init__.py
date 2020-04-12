@@ -107,10 +107,13 @@ class ExtendedAutocompleteInputWidget(AutocompleteInputWidget):
         ('deform_ext_autocomplete', None),
     )
     values = ()
-    display_value = lambda widget, field, cstruct: cstruct
     strip = True
     min_length = 1
     delay = None  # varying default, see `serialize()`
+
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault('display_value', lambda field, cstruct: cstruct)
+        super().__init__(*args, **kwargs)
 
     def serialize(self, field, cstruct, readonly=False):
         if cstruct in (null, None):
