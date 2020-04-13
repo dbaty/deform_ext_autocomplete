@@ -1,7 +1,7 @@
 -e .
 
 # Testing
-pyramid
+pyramid_chameleon
 pytest
 pytest-cov
 splinter

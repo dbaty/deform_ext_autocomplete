@@ -3,6 +3,9 @@
 Basic example
 =============
 
+We'll suppose that you use Pyramid. If not, you may have to adapt some
+of the instructions below.
+
 First of all, you need to enable the widget by imperatively calling
 the :py:class:`deform_ext_autocomplete.includeme` function, or by
 including the ``deform_ext_autocomplete`` string in the

@@ -2,9 +2,9 @@
 
 Instructions:
 
-1. Install Pyramid.
-2. Install deform_ext_autocomplete.
-3. Install waitress
+1. Install pyramid_chameleon.
+2. Install waitress
+3. Install deform_ext_autocomplete.
 4. Run "python app.py".
 
 An HTTP server will listen on port 61523: http://0.0.0.0:61523

@@ -9,7 +9,7 @@ usual):
 .. code-block:: bash
 
     $ cd tests/demo
-    $ pip install pyramid waitress
+    $ pip install pyramid_chameleon waitress
     $ pip install -e ..
 
 Then run the application:
