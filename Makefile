@@ -24,7 +24,7 @@ dist:
 quality:
 	isort --check-only --diff
 	python setup.py check --strict --metadata --restructuredtext
-	pylint --reports=no setup.py deform_ext_autocomplete
+	pylint --reports=no setup.py src/deform_ext_autocomplete
 
 .PHONY: upload
 upload:
