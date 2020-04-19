@@ -1,6 +1,27 @@
 language: python
 cache: pip
 
+services:
+  - xvfb
+
+# Incantations to make Chromium work for browser tests have been
+# completely cargo-culted. It works, which is good enough right now.
+addons:
+  chrome: stable
+
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install chromium-chromedriver
+  - export PATH=$PATH:/usr/lib/chromium-browser/
+
+# If we wanted to use Firefox, we could put this in `before_install`.
+#     - wget https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckodriver-v0.26.0-linux64.tar.gz
+#     - mkdir geckodriver
+#     - tar -xzf geckodriver-v0.26.0-linux64.tar.gz -C geckodriver
+#     - export PATH=$PATH:$PWD/geckodriver
+# However, we use Chromium instead because test_edit_form_multiple
+# inexplicably fails with Firefox on Travis. The test passes locally.
+
 matrix:
   fast_finish: true
   include:

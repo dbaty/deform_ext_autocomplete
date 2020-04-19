@@ -10,6 +10,7 @@ Instructions:
 An HTTP server will listen on port 61523: http://0.0.0.0:61523
 """
 
+import itertools
 import json
 import os
 
@@ -32,6 +33,13 @@ PERSONS = {'jhendrix': 'Jimi Hendrix',
            'jpage': 'Jimmy Page',
            'jbonham': 'John Bonham',
            'bcobham': 'Billy Cobham'}
+
+
+# We need a unique counter shared by all forms. Otherwise a distinct
+# (but identical) counter is used for each form and it generates the
+# same field identifiers for each form, which breaks our code. We
+# would not need that if we only had a single form on the page.
+FORM_ID_COUNTER = itertools.count()
 
 
 PersonNode = SchemaNode(
@@ -65,7 +73,13 @@ def make_form(request, form_class, form_name):
         )
     )
     action = request.route_url('index')
-    return Form(schema, action=action, buttons=['Save'])
+    return Form(
+        schema,
+        formid=form_name,
+        counter=FORM_ID_COUNTER,
+        action=action,
+        buttons=['Save'],
+    )
 
 
 def index(request):

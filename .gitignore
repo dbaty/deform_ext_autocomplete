@@ -24,3 +24,4 @@ pip-log.txt
 .mr.developer.cfg
 
 _build
+geckodriver.log

@@ -1,8 +1,11 @@
 -e .
 
 # Testing
+pyramid
 pytest
 pytest-cov
+splinter
+waitress
 
 # Docs (pin Sphinx until sphinx_rtd is compatible with a more recent version)
 sphinx<2
