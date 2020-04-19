@@ -6,7 +6,6 @@ recursive-include src/deform_ext_autocomplete *.py *.pt *.css *.js
 
 graft docs
 
-prune demo
 prune docs/_build
 prune tests
 exclude .pylintrc

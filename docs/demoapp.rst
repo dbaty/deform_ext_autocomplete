@@ -2,13 +2,13 @@ Demonstration application
 =========================
 
 ``deform_ext_autocomplete`` ships with a demonstration application.
-It is located in the ``demo`` directory of the source code. You first
+It is located in the ``tests/demo`` directory of the source code. You first
 need to install a few things (preferably in a virtual environment, as
 usual):
 
 .. code-block:: bash
 
-    $ cd demo
+    $ cd tests/demo
     $ pip install pyramid waitress
     $ pip install -e ..
 
