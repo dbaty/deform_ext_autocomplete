@@ -54,7 +54,7 @@ class TestWidget(TestCase):
     def test_serialize_url(self):
         import json
         widget = self._makeOne()
-        url='http://example.com'
+        url = 'http://example.com'
         widget.values = url
         renderer = DummyRenderer()
         schema = DummySchema()
@@ -72,7 +72,7 @@ class TestWidget(TestCase):
     def test_serialize_iterable(self):
         import json
         widget = self._makeOne()
-        vals = [1,2,3,4]
+        vals = [1, 2, 3, 4]
         widget.values = vals
         renderer = DummyRenderer()
         schema = DummySchema()
@@ -119,17 +119,17 @@ class TestWidget(TestCase):
         self.assertEqual(renderer.kw['visible_cstruct'], 'John Smith')
 
 
-class DummyRenderer(object):
+class DummyRenderer:
     def __call__(self, template, **kw):
         self.template = template
         self.kw = kw
 
 
-class DummySchema(object):
+class DummySchema:
     pass
 
 
-class DummyField(object):
+class DummyField:
     def __init__(self, schema=None, renderer=None, name='name'):
         self.schema = schema
         self.renderer = renderer

@@ -139,8 +139,8 @@ def index(request):
 
 
 def saved(request):
-    saved = json.loads(request.GET['saved'])
-    return {'saved': saved}
+    saved_data = json.loads(request.GET['saved'])
+    return {'saved': saved_data}
 
 
 def highlight_term(term, s, pattern='<strong>%s</strong>'):

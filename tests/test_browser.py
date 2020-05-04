@@ -74,7 +74,7 @@ def _check_autocompletion(b, field):
     assert field.value == 'Jimi Hendrix'
 
 
-def test_add_form_single(server, browser):
+def test_add_form_single(server, browser):  # pylint: disable=redefined-outer-name
     b = browser
     b.visit(APP_URL)
 
@@ -93,7 +93,7 @@ def test_add_form_single(server, browser):
     assert saved_data == "{'person': 'jhendrix'}"
 
 
-def test_add_form_multiple(server, browser):
+def test_add_form_multiple(server, browser):  # pylint: disable=redefined-outer-name
     b = browser
     b.visit(APP_URL)
 
@@ -121,7 +121,7 @@ def test_add_form_multiple(server, browser):
     assert saved_data == "{'persons': ['jhendrix', 'jbonham']}"
 
 
-def test_edit_form_multiple(server, browser):
+def test_edit_form_multiple(server, browser):  # pylint: disable=redefined-outer-name
     b = browser
     b.visit(APP_URL)
 
@@ -147,7 +147,7 @@ def test_edit_form_multiple(server, browser):
     assert saved_data == "{'persons': ['jhendrix', 'jbonham']}"
 
 
-def test_read_only_form(server, browser):
+def test_read_only_form(server, browser):  # pylint: disable=redefined-outer-name
     b = browser
     b.visit(APP_URL)
 
