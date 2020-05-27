@@ -1,7 +1,7 @@
 Changes
 =======
 
-1.0 (Unreleased)
+1.0 (2020-05-27)
 ----------------
 
 **WARNING :** This release contains many backwards-incompatible changes.
