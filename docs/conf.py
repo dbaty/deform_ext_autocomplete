@@ -4,6 +4,10 @@
 # list see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
+import datetime
+import pkg_resources
+
+
 # -- Path setup --------------------------------------------------------------
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -18,9 +22,11 @@
 # -- Project information -----------------------------------------------------
 
 project = 'Extended Autocomplete'
-copyright = '2020, Damien Baty'
+this_year = datetime.date.today().year
+copyright = f'{this_year}, Damien Baty'
 author = 'Damien Baty'
-
+version = pkg_resources.get_distribution("deform_ext_autocomplete").version
+release = version
 
 # -- General configuration ---------------------------------------------------
 

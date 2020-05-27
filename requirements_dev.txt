@@ -16,3 +16,6 @@ check-manifest
 isort[pyproject]
 pylint
 pylint_strict_informational
+
+# Release
+zest.releaser[recommended]
