@@ -1,8 +1,8 @@
 Changes
 =======
 
-1.1 (unreleased)
-----------------
+1.0.1 (2020-06-26)
+------------------
 
 - Fix wheel. The wheel for version 1.0 did not include non-Python
   files: templates, CSS and Javascript files were missing.
