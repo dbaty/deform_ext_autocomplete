@@ -4,11 +4,15 @@ Changes
 1.1 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Fix wheel. The wheel for version 1.0 did not include non-Python
+  files: templates, CSS and Javascript files were missing.
 
 
 1.0 (2020-05-27)
 ----------------
+
+**WARNING :** Brown bag release: the tarball is fine, but the wheel is
+ incomplete. Use 1.0.1 instead.
 
 **WARNING :** This release contains many backwards-incompatible changes.
 
